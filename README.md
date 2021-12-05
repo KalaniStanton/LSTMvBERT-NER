@@ -39,4 +39,26 @@ This process is repeated for both the `bert-base-cased` and the `bert-base-uncas
 
 ### BERT-BASE-NER
 
+## Data Preprocessing
+
+The dataset used in these notebooks was custom from applying OCR (via `textract`) to PDFs of three non-profit annual reports (Girls Who Code - 2020, Sierra Foundation - 2017, and Sesame Street Foundation - 2020). These were selected because I felt they represented distinct domains and presented information that I was interested in both syntactically coherent and incoherent formats. The documents were then converted to lists of plain-text by splitting on the occurrence of two new-line strings (‘\n\n’) and then were “sentencified” by splitting the resulting strings on any punctuation and removing any remaining, singular new-line (‘\n’) strings from the text. The documents ultimately returned 2,433 distinct sentences, which were loaded into a doccano docker container for labeling. I randomly selected 108 sentences to tag with entities and then use this tagged dataset across all of the models. Ideally, I would like to have more tagged sentences, but given the time constraints of the project I felt it was best to move forward and evaluate my methods on this set. 
+
+The following code for the `rummage` function shows the method by which I would extract lists of text sequences from the PDF documents:
+
+```python
+import textract
+
+def rummage(self):
+    """Method for extracting sentence strings from text. 
+    """
+    # Conditionals detect document type and run a rudimentary parsing/cleaning procedure depending for pdfs and htmls
+    text = textract.process(filePath)
+    text = text.decode("utf-8")
+    self.seedSource = str(input("Enter SOURCE (Title of Seed Source Document): ")) #Manual Input of seedSource title/name
+    text_chunks = str(text).split('\r\n\r\n')
+    clean_chunks = [''.join(filter(lambda x: x in set(string.printable), chunk)) for chunk in text_chunks]
+    text_lists = [x.strip().split('\r\n') for x in clean_chunks]
+    return text_lists
+```
+
 ## Results and Evaluation

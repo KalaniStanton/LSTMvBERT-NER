@@ -5,7 +5,13 @@ The reason for splitting the methods into different notebooks is that the number
 
 ## Getting Started
 
-It is highly reccomended that these notebooks be run in Google Colab as this was how they were originally constructed, but can be run on any cuda enabled device by simply modifying the path to the file located in the **Load Data** section of each file. 
+It is highly reccomended that these notebooks be run in Google Colab as this was how they were originally constructed, but can be run on any cuda enabled device with the libraries and version at the bottom of this readme are installed. 
+
+*IMPORTANT NOTE ABOUT LOADING DATA*
+
+If you are utilizing yourself with a google colab, it may be good to familiarize yourself with how to go about *mounting your google drive account* and how to access files inside your drive from a cell in a colab notebook. If you are not familiar, use [this notebook](https://colab.research.google.com/notebooks/io.ipynb) to get started
+
+
 
 ## Directory Structure
 
@@ -61,3 +67,73 @@ def rummage(self, filePath):
     text_lists = [x.strip().split('\r\n') for x in clean_chunks]
     return text_lists
 ```
+
+#### Packages Used
+
+The following packagelist is not a complete inventory of the python environment in which this was created. Google colab comes with many other libraries installed that are not utilized by these notebooks directly and thus they have been removed for the sake of brevity.
+
+Package                       Version
+----------------------------- --------------
+glob2                         0.7
+google                        2.0.3
+google-api-core               1.26.3
+google-api-python-client      1.12.8
+google-auth                   1.35.0
+google-auth-httplib2          0.0.4
+google-auth-oauthlib          0.4.6
+google-cloud-bigquery         1.21.0
+google-cloud-bigquery-storage 1.1.0
+google-cloud-core             1.0.3
+google-cloud-datastore        1.8.0
+google-cloud-firestore        1.7.0
+google-cloud-language         1.2.0
+google-cloud-storage          1.18.1
+google-cloud-translate        1.5.0
+google-colab                  1.0.0
+google-pasta                  0.2.0
+google-resumable-media        0.4.1
+googleapis-common-protos      1.53.0
+googledrivedownloader         0.4
+huggingface-hub               0.2.1
+importlib-metadata            4.8.2
+importlib-resources           5.4.0
+imutils                       0.5.4
+jax                           0.2.25
+jaxlib                        0.1.71+cuda111
+jsonschema                    2.6.0
+jupyter                       1.0.0
+jupyter-client                5.3.5
+jupyter-console               5.2.0
+jupyter-core                  4.9.1
+jupyterlab-pygments           0.1.2
+jupyterlab-widgets            1.0.2
+Markdown                      3.3.6
+matplotlib                    3.2.2
+numpy                         1.19.5
+nvidia-ml-py3                 7.352.0
+pandas                        1.1.5
+pandas-datareader             0.9.0
+pandas-gbq                    0.13.3
+pandas-profiling              1.4.1
+regex                         2019.12.20
+seqeval                       1.2.2
+setuptools                    57.4.0
+setuptools-git                1.2
+sklearn                       0.0
+tensorboard                   2.7.0
+tensorboard-data-server       0.6.1
+tensorboard-plugin-wit        1.8.0
+tensorflow                    2.7.0
+tensorflow-datasets           4.0.1
+tensorflow-estimator          2.7.0
+tensorflow-gcs-config         2.7.0
+tensorflow-hub                0.12.0
+tensorflow-io-gcs-filesystem  0.22.0
+tensorflow-metadata           1.4.0
+tensorflow-probability        0.15.0
+tokenizers                    0.10.3
+torch                         1.10.0+cu111
+torchaudio                    0.10.0+cu111
+torchsummary                  1.5.1
+torchtext                     0.11.0
+transformers                  4.12.5

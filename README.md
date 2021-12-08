@@ -11,12 +11,11 @@ It is highly reccomended that these notebooks be run in Google Colab as this was
 
 ```
 |_README.md
-|Data
-| |_doccano_test.jsonl
-|Notebooks
-  |_BiLSTM-CRF_Notebook.py
-  |_BERT-Finetune_Notebook.py
-  |_BERT-BASE-NER_Notebook.py
+|_BiLSTM-CRF_Notebook.ipynb
+|_BERT-Finetune_Notebook.ipynb
+|_BERT-BASE-NER_Notebook.ipynb
+|data
+  |_doccano_test.jsonl
 ```
 
 ## Notebooks
@@ -39,6 +38,8 @@ This process is repeated for both the `bert-base-cased` and the `bert-base-uncas
 
 ### BERT-BASE-NER
 
+Due to the fact that the bert-base-ner model is pretrained and fine-tuned, there is no training process. The file simply reads in the data, extracts the sequences and their labels, and passes the labels into the HuggingFace model for classification.  Note: There is a code chunk that returns an error due to incommensurate lists, this is expected behavior and is retained to demonstrate a distinction between this model and the previous two.
+
 ## Data Preprocessing
 
 The dataset used in these notebooks was custom from applying OCR (via `textract`) to PDFs of three non-profit annual reports (Girls Who Code - 2020, Sierra Foundation - 2017, and Sesame Street Foundation - 2020). These were selected because I felt they represented distinct domains and presented information that I was interested in both syntactically coherent and incoherent formats. The documents were then converted to lists of plain-text by splitting on the occurrence of two new-line strings (‘\n\n’) and then were “sentencified” by splitting the resulting strings on any punctuation and removing any remaining, singular new-line (‘\n’) strings from the text. The documents ultimately returned 2,433 distinct sentences, which were loaded into a doccano docker container for labeling. I randomly selected 108 sentences to tag with entities and then use this tagged dataset across all of the models. Ideally, I would like to have more tagged sentences, but given the time constraints of the project I felt it was best to move forward and evaluate my methods on this set. 
@@ -48,7 +49,7 @@ The following code for the `rummage` function shows the method by which I would 
 ```python
 import textract
 
-def rummage(self):
+def rummage(self, filePath):
     """Method for extracting sentence strings from text. 
     """
     # Conditionals detect document type and run a rudimentary parsing/cleaning procedure depending for pdfs and htmls
@@ -60,5 +61,3 @@ def rummage(self):
     text_lists = [x.strip().split('\r\n') for x in clean_chunks]
     return text_lists
 ```
-
-## Results and Evaluation
